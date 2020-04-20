@@ -1,1 +1,50 @@
-.episode {}
+body {
+    background-color: rgb(24, 24, 24);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.episode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    width: 300px;
+    height: 500px;
+    margin: 20px;
+    padding: 0 15px;
+    box-shadow: 5px 5px 10px black;
+}
+
+.season-episode {
+    color: rgb(24, 24, 24);
+    background-color: grey;
+    padding: 5px;
+    margin-left: 15em;
+    box-shadow: 5px 5px 10px black;
+}
+
+.link-Tv-Maze {
+    height: 130px;
+    background-color: rgb(40, 40, 40);
+    bottom: 50%;
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-decoration: none;
+    color: honeydew;
+    padding: 10px;
+    position: fixed;
+}
+
+.link-Tv-Maze:hover {
+    background-color: honeydew;
+    color: rgb(40, 40, 40);
+}
