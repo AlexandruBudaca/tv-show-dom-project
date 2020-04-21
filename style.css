@@ -11,9 +11,8 @@ body {
 }
 
 .episode {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
+    text-align: center;
     background-color: rgb(40, 40, 40);
     color: white;
     width: 300px;
@@ -23,11 +22,17 @@ body {
     box-shadow: 5px 5px 10px black;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
 .season-episode {
     color: rgb(24, 24, 24);
     background-color: grey;
+    width: 60px;
     padding: 5px;
-    margin-left: 15em;
+    margin-left: 14em;
     box-shadow: 5px 5px 10px black;
 }
 
@@ -47,4 +52,26 @@ body {
 .link-Tv-Maze:hover {
     background-color: honeydew;
     color: rgb(40, 40, 40);
+}
+
+input {
+    width: 250px;
+    padding: 4px;
+}
+
+.search {
+
+    margin: 10px 10px;
+    padding: 10px;
+
+}
+
+.title-search {
+    color: white;
+    margin: auto;
+
+}
+
+p {
+    text-align: left;
 }
