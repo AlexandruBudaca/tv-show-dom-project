@@ -3,6 +3,8 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   searchInput();
+  selectEpisode(allEpisodes);
+  // scroll();
 }
 
 //link to TvMaze
@@ -19,11 +21,25 @@ let divRoot = document.getElementById("root");
 //search
 let divSearch = document.createElement("div");
 divRoot.appendChild(divSearch).className = "search";
+//select
+let divSelect = document.createElement("div");
+divSearch.appendChild(divSelect);
+let formSelect = document.createElement("form");
+divSelect.appendChild(formSelect);
+let selectEpisodes = document.createElement("select");
+selectEpisodes.setAttribute("name", "selectEp");
+selectEpisodes.className = "select";
+formSelect.appendChild(selectEpisodes);
+selectEpisodes.addEventListener("change", scroll);
+
+//searct title
 let h2Search = document.createElement("h4");
 h2Search.className = "title-search";
 divSearch.appendChild(h2Search).innerHTML = "Search";
+//search input
 let input = document.createElement("input");
 divSearch.appendChild(input);
+//displaying the numeber of episodes
 let numOfEpisodes = document.createElement("p");
 numOfEpisodes.className = "num-episodes";
 divSearch.appendChild(numOfEpisodes);
@@ -39,6 +55,7 @@ function makePageForEpisodes(episodeList) {
   episodeList.forEach((el) => {
     let divEpisode = document.createElement("div");
     divEpisode.className = "episode";
+    divEpisode.id = el.id;
     divContainer.appendChild(divEpisode);
     let seasonNumberAndEpisode = document.createElement("h3");
     seasonNumberAndEpisode.className = "season-episode";
@@ -73,5 +90,26 @@ function searchInput() {
   let allDivEpisodes = document.getElementsByClassName("episode").length;
   numOfEpisodes.innerText = `Displaying ${count}/ ${allDivEpisodes} episodes`;
 }
+
+function selectEpisode(episodes) {
+  episodes.forEach((ep) => {
+    let option = document.createElement("option");
+    option.className = "option";
+    selectEpisodes.appendChild(option);
+    option.id = ep.id;
+    let anchor = document.createElement("a");
+    option.appendChild(anchor);
+    // anchor.href = `#${ep.id}`;
+    anchor.innerText = `S${ep.season
+      .toString()
+      .padStart(2, "0")}E${ep.number.toString().padStart(2, "0")} ${ep.name}`;
+  });
+}
+
+// function scroll() {
+//   let selectForm = document.forms[0].selectEp;
+//   let destination = selectForm[selectForm.selectedIndex].id;
+//   document.getElementById(destination).scrollIntoView();
+// }
 
 window.onload = setup;

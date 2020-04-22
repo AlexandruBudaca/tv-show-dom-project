@@ -82,3 +82,11 @@ p {
     margin: 10px;
     color: honeydew;
 }
+
+.select {
+    color: whitesmoke
+}
+
+.option {
+    color: whitesmoke;
+}
