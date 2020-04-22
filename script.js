@@ -95,14 +95,15 @@ function searchInput() {
 }
 
 function selectEpisode(episodes) {
+  let defaultOption = document.createElement("option");
+  defaultOption.innerText = "Go to";
+  selectEpisodes.appendChild(defaultOption);
   episodes.forEach((ep) => {
     let option = document.createElement("option");
     option.className = "option";
     selectEpisodes.appendChild(option);
     option.value = ep.id;
-    let anchor = document.createElement("a");
-    option.appendChild(anchor);
-    anchor.innerText = `S${ep.season
+    option.innerText = `S${ep.season
       .toString()
       .padStart(2, "0")}E${ep.number.toString().padStart(2, "0")} ${ep.name}`;
   });

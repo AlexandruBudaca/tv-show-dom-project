@@ -37,7 +37,7 @@ body {
 }
 
 .link-Tv-Maze {
-    height: 130px;
+    height: 140px;
     background-color: rgb(40, 40, 40);
     bottom: 50%;
     position: absolute;
@@ -47,6 +47,7 @@ body {
     color: honeydew;
     padding: 10px;
     position: fixed;
+    text-align: center;
 }
 
 .link-Tv-Maze:hover {
@@ -57,6 +58,7 @@ body {
 input {
     width: 250px;
     padding: 10px;
+    outline: none;
 }
 
 .search {
@@ -67,6 +69,7 @@ input {
     align-items: center;
     margin: 10px 10px;
     padding: 10px;
+
 
 }
 
@@ -86,9 +89,8 @@ p {
 }
 
 .select {
-    color: whitesmoke
-}
-
-.option {
+    background-color: teal;
     color: whitesmoke;
+    box-shadow: 5px 5px 10px black;
+    outline: none;
 }
