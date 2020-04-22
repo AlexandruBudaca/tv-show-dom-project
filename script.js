@@ -91,7 +91,9 @@ function searchInput() {
     }
   });
   let allDivEpisodes = document.getElementsByClassName("episode").length;
-  numOfEpisodes.innerText = `Displaying ${count}/ ${allDivEpisodes} episodes`;
+  numOfEpisodes.innerText = `Displaying ${count
+    .toString()
+    .padStart(2, "0")} / ${allDivEpisodes} episodes`;
 }
 
 function selectEpisode(episodes) {
