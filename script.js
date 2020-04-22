@@ -29,6 +29,7 @@ divSelect.appendChild(formSelect);
 let selectEpisodes = document.createElement("select");
 selectEpisodes.setAttribute("name", "selectEp");
 selectEpisodes.className = "select";
+selectEpisodes.id = "selectEpisodesId";
 formSelect.appendChild(selectEpisodes);
 selectEpisodes.addEventListener("change", scroll);
 
@@ -65,11 +66,13 @@ function makePageForEpisodes(episodeList) {
       .toString()
       .padStart(2, "0")}E${el.number.toString().padStart(2, "0")}`;
     let title = document.createElement("h2");
-    divEpisode.appendChild(title).innerHTML = el.name;
+    divEpisode.appendChild(title).innerText = el.name;
     let epImg = document.createElement("img");
     divEpisode.appendChild(epImg).src = el.image.medium;
     let summary = document.createElement("p");
-    divEpisode.appendChild(summary).innerHTML = el.summary;
+    divEpisode.appendChild(summary).innerText = el.summary
+      .replace("<p>", "")
+      .replace("</p>", "");
   });
 }
 let searchBar = document.getElementById("input-search");
@@ -96,20 +99,18 @@ function selectEpisode(episodes) {
     let option = document.createElement("option");
     option.className = "option";
     selectEpisodes.appendChild(option);
-    option.id = ep.id;
+    option.value = ep.id;
     let anchor = document.createElement("a");
     option.appendChild(anchor);
-    // anchor.href = `#${ep.id}`;
     anchor.innerText = `S${ep.season
       .toString()
       .padStart(2, "0")}E${ep.number.toString().padStart(2, "0")} ${ep.name}`;
   });
 }
 
-// function scroll() {
-//   let selectForm = document.forms[0].selectEp;
-//   let destination = selectForm[selectForm.selectedIndex].id;
-//   document.getElementById(destination).scrollIntoView();
-// }
+function scroll() {
+  let selectForm = document.getElementById("selectEpisodesId");
+  window.location.hash = selectForm.options[selectForm.selectedIndex].value;
+}
 
 window.onload = setup;
