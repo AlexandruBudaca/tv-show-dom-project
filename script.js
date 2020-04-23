@@ -4,7 +4,6 @@ function setup() {
 
   const allShows = getAllShows();
   makeSelectShows(allShows);
-  listEpisodesShow();
 }
 
 //link to TvMaze
