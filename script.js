@@ -1,7 +1,6 @@
 //You can edit ALL of the code here
 function setup() {
   // const allEpisodes = getAllEpisodes();
-
   const allShows = getAllShows();
   makeSelectShows(allShows);
 }
