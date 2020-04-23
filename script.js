@@ -3,6 +3,7 @@ function setup() {
   // const allEpisodes = getAllEpisodes();
   const allShows = getAllShows();
   makeSelectShows(allShows);
+
   listEpisodesShow();
 }
 
@@ -55,9 +56,12 @@ input.setAttribute("type", "text");
 //Container for episodes
 let divContainer = document.createElement("div");
 divContainer.className = "container";
+divContainer.id = "container-div";
 divRoot.appendChild(divContainer);
 
 function makePageForEpisodes(episodeList) {
+  let allDives = document.getElementsByClassName("episode");
+  Array.from(allDives).forEach((item) => item.remove());
   episodeList.forEach((el) => {
     let divEpisode = document.createElement("div");
     divEpisode.className = "episode";
@@ -80,6 +84,7 @@ function makePageForEpisodes(episodeList) {
       .replace("</p>", "");
   });
 }
+
 let searchBar = document.getElementById("input-search");
 searchBar.addEventListener("keyup", searchInput);
 
@@ -102,8 +107,11 @@ function searchInput() {
 }
 
 function selectEpisode(episodes) {
+  let selectEpisodeOptions = document.getElementsByClassName("option");
+  Array.from(selectEpisodeOptions).forEach((opt) => opt.remove());
   let defaultOption = document.createElement("option");
   defaultOption.innerText = "Go to";
+  defaultOption.className = "option";
   selectEpisodes.appendChild(defaultOption);
   episodes.forEach((ep) => {
     let option = document.createElement("option");
@@ -136,9 +144,7 @@ let url = "https://api.tvmaze.com/shows/show-id/episodes";
 function listEpisodesShow() {
   let showForm = document.forms[0].allShows;
   let numberShow = showForm.options[showForm.selectedIndex].id;
-  console.log(numberShow);
   let newUrl = url.replace("show-id", `${numberShow}`);
-  console.log(newUrl);
   callFetch(newUrl);
 }
 function callFetch(some) {

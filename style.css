@@ -85,13 +85,32 @@ p {
   color: whitesmoke;
 }
 
+select {
+  height: 30px;
+  border: none;
+}
+
 .select {
   background-color: teal;
   color: whitesmoke;
   box-shadow: 5px 5px 10px black;
-  outline: none;
   margin: 0px 50px;
+  padding: 20px;
+  outline: none;
+
 }
+
+
+
+#shows {
+  background-color: teal;
+  color: whitesmoke;
+  box-shadow: 5px 5px 10px black;
+  margin: 20px 10px;
+  outline: none;
+}
+
+
 @media (max-width: 800px) {
   .search {
     flex-direction: column;
