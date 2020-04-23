@@ -141,13 +141,13 @@ function listEpisodesShow() {
   console.log(newUrl);
   callFetch(newUrl);
 }
-function callFetch(some) {
-  fetch(some)
-    .then((response) => response.json())
-    .then((data) => {
-      makePageForEpisodes(data);
-      selectEpisode(data);
-      searchInput();
-    });
-}
+// function callFetch(some) {
+//   fetch(some)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       makePageForEpisodes(data);
+//       selectEpisode(data);
+//       searchInput();
+//     });
+// }
 window.onload = setup;
