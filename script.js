@@ -1,10 +1,10 @@
 //You can edit ALL of the code here
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
-  searchInput();
-  selectEpisode(allEpisodes);
-  // scroll();
+  // const allEpisodes = getAllEpisodes();
+
+  const allShows = getAllShows();
+  makeSelectShows(allShows);
+  listEpisodesShow();
 }
 
 //link to TvMaze
@@ -21,11 +21,17 @@ let divRoot = document.getElementById("root");
 //search
 let divSearch = document.createElement("div");
 divRoot.appendChild(divSearch).className = "search";
-//select
-let divSelect = document.createElement("div");
-divSearch.appendChild(divSelect);
+//select shows
+let formShows = document.createElement("form");
+divSearch.appendChild(formShows);
+let selectShows = document.createElement("select");
+formShows.appendChild(selectShows);
+selectShows.id = "shows";
+selectShows.name = "allShows";
+selectShows.addEventListener("change", listEpisodesShow);
+//select episodes
 let formSelect = document.createElement("form");
-divSelect.appendChild(formSelect);
+divSearch.appendChild(formSelect);
 let selectEpisodes = document.createElement("select");
 selectEpisodes.setAttribute("name", "selectEp");
 selectEpisodes.className = "select";
@@ -40,7 +46,7 @@ divSearch.appendChild(h2Search).innerHTML = "Search";
 //search input
 let input = document.createElement("input");
 divSearch.appendChild(input);
-//displaying the numeber of episodes
+//displaying the number of episodes
 let numOfEpisodes = document.createElement("p");
 numOfEpisodes.className = "num-episodes";
 divSearch.appendChild(numOfEpisodes);
@@ -116,4 +122,33 @@ function scroll() {
   window.location.hash = selectForm.options[selectForm.selectedIndex].value;
 }
 
+function makeSelectShows(allShows) {
+  allShows.sort((a, b) => (a.name > b.name ? 1 : -1));
+  allShows.forEach((show) => {
+    let optShow = document.createElement("option");
+    optShow.className = "show-option";
+    optShow.id = show.id;
+    selectShows.appendChild(optShow);
+    optShow.innerText = show.name;
+  });
+}
+let url = "http://api.tvmaze.com/shows/show-id/episodes";
+
+function listEpisodesShow() {
+  let showForm = document.forms[0].allShows;
+  let numberShow = showForm.options[showForm.selectedIndex].id;
+  console.log(numberShow);
+  let newUrl = url.replace("show-id", `${numberShow}`);
+  console.log(newUrl);
+  callFetch(newUrl);
+}
+function callFetch(some) {
+  fetch(some)
+    .then((response) => response.json())
+    .then((data) => {
+      makePageForEpisodes(data);
+      selectEpisode(data);
+      searchInput();
+    });
+}
 window.onload = setup;
