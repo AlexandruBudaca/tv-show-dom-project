@@ -62,6 +62,7 @@ divRoot.appendChild(divContainer);
 function makePageForEpisodes(episodeList) {
   let allDives = document.getElementsByClassName("episode");
   Array.from(allDives).forEach((item) => item.remove());
+
   episodeList.forEach((el) => {
     let divEpisode = document.createElement("div");
     divEpisode.className = "episode";
@@ -109,10 +110,12 @@ function searchInput() {
 function selectEpisode(episodes) {
   let selectEpisodeOptions = document.getElementsByClassName("option");
   Array.from(selectEpisodeOptions).forEach((opt) => opt.remove());
+
   let defaultOption = document.createElement("option");
   defaultOption.innerText = "Go to";
   defaultOption.className = "option";
   selectEpisodes.appendChild(defaultOption);
+
   episodes.forEach((ep) => {
     let option = document.createElement("option");
     option.className = "option";
