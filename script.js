@@ -131,7 +131,7 @@ function makeSelectShows(allShows) {
     optShow.innerText = show.name;
   });
 }
-let url = "http://api.tvmaze.com/shows/show-id/episodes";
+let url = "https://api.tvmaze.com/shows/show-id/episodes";
 
 function listEpisodesShow() {
   let showForm = document.forms[0].allShows;
