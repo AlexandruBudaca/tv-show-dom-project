@@ -150,8 +150,8 @@ function listEpisodesShow() {
   let newUrl = url.replace("show-id", `${numberShow}`);
   callFetch(newUrl);
 }
-function callFetch(some) {
-  fetch(some)
+function callFetch(episodesUrl) {
+  fetch(episodesUrl)
     .then((response) => response.json())
     .then((data) => {
       makePageForEpisodes(data);
