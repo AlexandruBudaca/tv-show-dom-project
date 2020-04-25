@@ -130,13 +130,15 @@ function scroll() {
   let selectForm = document.getElementById("selectEpisodesId");
   // window.location.hash = selectForm.options[selectForm.selectedIndex].value;
   let optionEp = selectForm.options[selectForm.selectedIndex].value;
-  let allDivesId = document.getElementById(`${optionEp}`);
-  console.log(allDivesId);
-  allDivesId.scrollIntoView({
+  let divId = document.getElementById(`${optionEp}`);
+  divId.scrollIntoView({
     behavior: "smooth",
     block: "end",
     inline: "nearest",
   });
+  divId.childNodes[1].style.backgroundColor = "teal";
+  divId.firstChild.style.backgroundColor = "teal";
+  divId.firstChild.style.color = "white";
   // allDivesId.focus({ preventScroll: false });
 }
 
