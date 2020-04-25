@@ -2,6 +2,8 @@
 const allShows = getAllShows();
 
 function setup() {
+  let divSearchAll = document.getElementById("search-container");
+  divSearchAll.style.display = "none";
   makePageForShows(allShows);
 }
 
@@ -27,6 +29,21 @@ let pLogo = document.createElement("p");
 headerHome.appendChild(pLogo);
 pLogo.innerText = "tv-show database ";
 pLogo.className = "pLogo";
+// input filter shows
+let divFilter = document.createElement("div");
+divRoot.appendChild(divFilter);
+divFilter.className = "div-filter";
+divFilter.id = "div-filter-show";
+let labelInput = document.createElement("label");
+divFilter.appendChild(labelInput);
+labelInput.className = "label-input";
+labelInput.innerText = "Filter: ";
+let inputFilterShows = document.createElement("input");
+inputFilterShows.className = "filter";
+inputFilterShows.setAttribute("type", "text");
+inputFilterShows.id = "filter-shows";
+divFilter.appendChild(inputFilterShows);
+// inputFilterShows.addEventListener("keyup");
 
 //search
 let divSearch = document.createElement("div");
@@ -61,7 +78,7 @@ divSearch.appendChild(input);
 let numOfEpisodes = document.createElement("p");
 numOfEpisodes.className = "num-episodes";
 divSearch.appendChild(numOfEpisodes);
-input.setAttribute("id", "input-search");
+input.id = "input-search";
 input.setAttribute("type", "text");
 
 //Container for episodes
@@ -192,8 +209,6 @@ function callFetch(episodesUrl) {
 
 function makePageForShows(shows) {
   shows.sort((a, b) => (a.name > b.name ? 1 : -1));
-  let divSearchAll = document.getElementById("search-container");
-  divSearchAll.style.display = "none";
 
   shows.forEach((show) => {
     let divShow = document.createElement("div");
@@ -269,6 +284,7 @@ function showEpisodesWhenClickOnShow() {
   callFetch(newShowUrl);
   let optionShow = document.getElementById(`${anchorId}`);
   optionShow.selected = true;
+  document.getElementById("div-filter-show").remove();
 }
 
 window.onload = setup;
