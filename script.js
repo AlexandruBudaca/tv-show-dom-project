@@ -2,8 +2,9 @@
 const allShows = getAllShows();
 
 function setup() {
+  let divSearchAll = document.getElementById("search-container");
+  divSearchAll.style.display = "none";
   makePageForShows(allShows);
-  makeSelectShows(allShows);
 }
 
 //link to TvMaze
@@ -58,6 +59,9 @@ let divContainer = document.createElement("div");
 divContainer.className = "container";
 divContainer.id = "container-div";
 divRoot.appendChild(divContainer);
+
+//make filter shows
+let inputFilter = document.createElement("input");
 
 function makePageForEpisodes(episodeList) {
   let allDives = document.getElementsByClassName("episode");
@@ -182,9 +186,6 @@ function callFetch(episodesUrl) {
 function makePageForShows(shows) {
   shows.sort((a, b) => (a.name > b.name ? 1 : -1));
 
-  let divSearchAll = document.getElementById("search-container");
-  divSearchAll.style.display = "none";
-
   shows.forEach((show) => {
     let divShow = document.createElement("div");
     divShow.className = "div-show";
@@ -247,6 +248,7 @@ function makePageForShows(shows) {
 }
 
 function showEpisodesWhenClickOnShow() {
+  makeSelectShows(allShows);
   let allDives = document.getElementsByClassName("div-show");
   Array.from(allDives).forEach((item) => item.remove());
 
@@ -259,7 +261,8 @@ function showEpisodesWhenClickOnShow() {
   let anchorId = this.id;
   let newShowUrl = url.replace("show-id", `${anchorId}`);
   callFetch(newShowUrl);
-  let showForm = document.getElementById(`${anchorId}`);
-  showForm.selected = true;
+  let optionShow = document.getElementById(`${anchorId}`);
+  optionShow.selected = true;
 }
+
 window.onload = setup;
