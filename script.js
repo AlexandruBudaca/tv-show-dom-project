@@ -3,7 +3,6 @@ function setup() {
   // const allEpisodes = getAllEpisodes();
   const allShows = getAllShows();
   makeSelectShows(allShows);
-
   listEpisodesShow();
 }
 
@@ -129,7 +128,16 @@ function selectEpisode(episodes) {
 
 function scroll() {
   let selectForm = document.getElementById("selectEpisodesId");
-  window.location.hash = selectForm.options[selectForm.selectedIndex].value;
+  // window.location.hash = selectForm.options[selectForm.selectedIndex].value;
+  let optionEp = selectForm.options[selectForm.selectedIndex].value;
+  let allDivesId = document.getElementById(`${optionEp}`);
+  console.log(allDivesId);
+  allDivesId.scrollIntoView({
+    behavior: "smooth",
+    block: "end",
+    inline: "nearest",
+  });
+  // allDivesId.focus({ preventScroll: false });
 }
 
 function makeSelectShows(allShows) {
