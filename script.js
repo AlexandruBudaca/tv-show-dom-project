@@ -139,7 +139,7 @@ function scroll() {
   divId.childNodes[1].style.backgroundColor = "teal";
   divId.firstChild.style.backgroundColor = "teal";
   divId.firstChild.style.color = "white";
-  // allDivesId.focus({ preventScroll: false });
+  // divId.focus({ preventScroll: false });
 }
 
 function makeSelectShows(allShows) {
