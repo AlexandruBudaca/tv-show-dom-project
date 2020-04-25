@@ -2,8 +2,10 @@
 function setup() {
   // const allEpisodes = getAllEpisodes();
   const allShows = getAllShows();
+  makePageForShows(allShows);
   makeSelectShows(allShows);
-  listEpisodesShow();
+  console.log(allShows);
+  // listEpisodesShow();
 }
 
 //link to TvMaze
@@ -19,6 +21,7 @@ let divRoot = document.getElementById("root");
 
 //search
 let divSearch = document.createElement("div");
+divSearch.id = "search-container";
 divRoot.appendChild(divSearch).className = "search";
 //select shows
 let formShows = document.createElement("form");
@@ -38,7 +41,7 @@ selectEpisodes.id = "selectEpisodesId";
 formSelect.appendChild(selectEpisodes);
 selectEpisodes.addEventListener("change", scroll);
 
-//searct title
+//search title
 let h2Search = document.createElement("h4");
 h2Search.className = "title-search";
 divSearch.appendChild(h2Search).innerHTML = "Search";
@@ -77,7 +80,14 @@ function makePageForEpisodes(episodeList) {
     let title = document.createElement("h2");
     divEpisode.appendChild(title).innerText = el.name;
     let epImg = document.createElement("img");
-    divEpisode.appendChild(epImg).src = el.image.medium;
+    divEpisode.appendChild(epImg);
+    if (el.image === null) {
+      epImg.src =
+        "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png";
+    } else {
+      epImg.src = el.image.medium;
+    }
+
     let summary = document.createElement("p");
     divEpisode.appendChild(summary).innerText = el.summary
       .replace("<p>", "")
@@ -144,6 +154,7 @@ function scroll() {
 
 function makeSelectShows(allShows) {
   allShows.sort((a, b) => (a.name > b.name ? 1 : -1));
+
   allShows.forEach((show) => {
     let optShow = document.createElement("option");
     optShow.className = "show-option";
@@ -169,4 +180,75 @@ function callFetch(episodesUrl) {
       searchInput();
     });
 }
+
+function makePageForShows(shows) {
+  shows.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+  let divSearchAll = document.getElementById("search-container");
+  divSearchAll.style.display = "none";
+
+  shows.forEach((show) => {
+    let divShow = document.createElement("div");
+    divShow.className = "div-show";
+    divContainer.appendChild(divShow);
+    let divLink = document.createElement("div");
+    divLink.className = "div-link";
+    divShow.appendChild(divLink);
+    let link = document.createElement("a");
+    link.className = "link-title";
+    link.id = show.id;
+    link.addEventListener("click", showEpisodesWhenClickOnShow);
+    divLink.appendChild(link);
+    link.innerText = show.name;
+    let containerShow = document.createElement("div");
+    containerShow.className = "container-show";
+    divShow.appendChild(containerShow);
+    let divImage = document.createElement("div");
+    containerShow.appendChild(divImage);
+    let imageShow = document.createElement("img");
+    divImage.appendChild(imageShow);
+    if (show.image === null) {
+      imageShow.src =
+        "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png";
+    } else {
+      imageShow.src = show.image.medium;
+    }
+
+    let pDiv = document.createElement("div");
+    pDiv.className = "p-div-show";
+    containerShow.appendChild(pDiv);
+    let showSummary = document.createElement("p");
+    showSummary.className = "show-summary";
+    showSummary.innerText = show.summary
+      .replace("<p>", "")
+      .replace("</p>", "")
+      .replace("<b>", "")
+      .replace("</b>", "");
+    pDiv.appendChild(showSummary);
+    let detailsDiv = document.createElement("div");
+    detailsDiv.className = "details-div";
+    containerShow.appendChild(detailsDiv);
+    let rated = document.createElement("p");
+    rated.className = "rating";
+    rated.innerText = `Rated: ${show.rating.average}`;
+    detailsDiv.appendChild(rated);
+    let genre = document.createElement("p");
+    genre.innerText = `Genres: ${show.genres[0]}`;
+    detailsDiv.appendChild(genre);
+  });
+}
+
+function showEpisodesWhenClickOnShow() {
+  let allDives = document.getElementsByClassName("div-show");
+  Array.from(allDives).forEach((item) => item.remove());
+  // let formSelectShows = document.getElementById("shows");
+  // formSelectShows.style.display = "none";
+  let divSearchAll = document.getElementById("search-container");
+  divSearchAll.style.display = "flex";
+
+  let anchorId = this.id;
+  let newShowUrl = url.replace("show-id", `${anchorId}`);
+  callFetch(newShowUrl);
+}
+
 window.onload = setup;

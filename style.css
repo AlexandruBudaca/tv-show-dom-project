@@ -5,6 +5,7 @@ body {
 }
 
 .container {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -102,14 +103,70 @@ select {
 
 }
 
-
-
 #shows {
   background-color: teal;
   color: whitesmoke;
   box-shadow: 5px 5px 10px black;
   margin: 20px 10px;
   outline: none;
+}
+
+
+
+.div-show {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  max-height: 400px;
+  background-color: rgb(40, 40, 40);
+  margin: 10px 20px;
+  color: honeydew;
+  box-shadow: 5px 5px 10px black;
+}
+
+.div-link {
+  margin: 20px;
+  background-color: teal
+}
+
+.div-link:hover {
+  margin: 20px;
+  background-color: rgb(24, 24, 24);
+}
+
+.link-title {
+  cursor: pointer;
+  font-size: 30px;
+  padding: 2em;
+  color: rgb(40, 40, 40);
+}
+
+.link-title:hover {
+  color: honeydew
+}
+
+.container-show {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-div {
+  width: 200px;
+  margin: 0px 20px;
+  border: 2px solid teal;
+  height: 270px;
+  padding: 10px;
+  text-align: left;
+}
+
+.rating {
+  width: 100px;
+}
+
+.show-summary {
+  width: 500px;
+  margin: 10px;
 }
 
 
