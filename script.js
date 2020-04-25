@@ -2,8 +2,6 @@
 const allShows = getAllShows();
 
 function setup() {
-  let divSearchAll = document.getElementById("search-container");
-  divSearchAll.style.display = "none";
   makePageForShows(allShows);
 }
 
@@ -17,6 +15,18 @@ let body = document.querySelector("body");
 body.appendChild(linkTvMaze);
 
 let divRoot = document.getElementById("root");
+
+//header
+let headerHome = document.createElement("header");
+divRoot.appendChild(headerHome);
+let logo = document.createElement("h1");
+headerHome.appendChild(logo);
+logo.innerText = "{S}erials";
+logo.className = "logo";
+let pLogo = document.createElement("p");
+headerHome.appendChild(pLogo);
+pLogo.innerText = "tv-show database ";
+pLogo.className = "pLogo";
 
 //search
 let divSearch = document.createElement("div");
@@ -59,9 +69,6 @@ let divContainer = document.createElement("div");
 divContainer.className = "container";
 divContainer.id = "container-div";
 divRoot.appendChild(divContainer);
-
-//make filter shows
-let inputFilter = document.createElement("input");
 
 function makePageForEpisodes(episodeList) {
   let allDives = document.getElementsByClassName("episode");
@@ -185,6 +192,8 @@ function callFetch(episodesUrl) {
 
 function makePageForShows(shows) {
   shows.sort((a, b) => (a.name > b.name ? 1 : -1));
+  let divSearchAll = document.getElementById("search-container");
+  divSearchAll.style.display = "none";
 
   shows.forEach((show) => {
     let divShow = document.createElement("div");
@@ -251,9 +260,6 @@ function showEpisodesWhenClickOnShow() {
   makeSelectShows(allShows);
   let allDives = document.getElementsByClassName("div-show");
   Array.from(allDives).forEach((item) => item.remove());
-
-  // let formSelectShows = document.getElementById("shows");
-  // formSelectShows.style.display = "none";
 
   let divSearchAll = document.getElementById("search-container");
   divSearchAll.style.display = "flex";

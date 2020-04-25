@@ -4,11 +4,36 @@ body {
   padding: 0;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background-color: rgb(40, 40, 40);
+  box-shadow: 5px 5px 10px black;
+  margin: 0;
+}
+
+.logo {
+  color: teal;
+  margin-left: 50px;
+  margin-top: 10px;
+}
+
+.pLogo {
+  position: absolute;
+  color: honeydew;
+  margin-left: 55px;
+  margin-top: 20px;
+  font-size: medium;
+}
+
 .container {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 40px;
 }
 
 .episode {
