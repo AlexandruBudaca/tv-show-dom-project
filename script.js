@@ -19,8 +19,9 @@ body.appendChild(linkTvMaze);
 let divRoot = document.getElementById("root");
 
 //header
-let headerHome = document.createElement("header");
+let headerHome = document.createElement("div");
 divRoot.appendChild(headerHome);
+headerHome.className = "div-header";
 let logo = document.createElement("h1");
 headerHome.appendChild(logo);
 logo.innerText = "{S}erials";
