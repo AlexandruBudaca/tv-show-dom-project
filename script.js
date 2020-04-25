@@ -31,19 +31,19 @@ headerHome.appendChild(pLogo);
 pLogo.innerText = "tv-show database ";
 pLogo.className = "pLogo";
 // input filter shows
-let divFilter = document.createElement("div");
-divRoot.appendChild(divFilter);
-divFilter.className = "div-filter";
-divFilter.id = "div-filter-show";
-let labelInput = document.createElement("label");
-divFilter.appendChild(labelInput);
-labelInput.className = "label-input";
-labelInput.innerText = "Filter: ";
-let inputFilterShows = document.createElement("input");
-inputFilterShows.className = "filter";
-inputFilterShows.setAttribute("type", "text");
-inputFilterShows.id = "filter-shows";
-divFilter.appendChild(inputFilterShows);
+// let divFilter = document.createElement("div");
+// divRoot.appendChild(divFilter);
+// divFilter.className = "div-filter";
+// divFilter.id = "div-filter-show";
+// let labelInput = document.createElement("label");
+// divFilter.appendChild(labelInput);
+// labelInput.className = "label-input";
+// labelInput.innerText = "Filter: ";
+// let inputFilterShows = document.createElement("input");
+// inputFilterShows.className = "filter";
+// inputFilterShows.setAttribute("type", "text");
+// inputFilterShows.id = "filter-shows";
+// divFilter.appendChild(inputFilterShows);
 // inputFilterShows.addEventListener("keyup");
 
 //search
