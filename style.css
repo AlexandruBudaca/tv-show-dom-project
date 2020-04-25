@@ -116,8 +116,7 @@ select {
 .div-show {
   display: flex;
   flex-direction: column;
-  width: 1000px;
-  max-height: 400px;
+  flex-wrap: wrap;
   background-color: rgb(40, 40, 40);
   margin: 10px 20px;
   color: honeydew;
@@ -126,12 +125,12 @@ select {
 
 .div-link {
   margin: 20px;
-  background-color: teal
+  background-color: teal;
 }
 
 .div-link:hover {
   margin: 20px;
-  background-color: rgb(24, 24, 24);
+  background-color: honeydew;
 }
 
 .link-title {
@@ -142,30 +141,29 @@ select {
 }
 
 .link-title:hover {
-  color: honeydew
+  color: teal
 }
 
 .container-show {
   margin: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+
+
 }
 
 .details-div {
   width: 200px;
-  margin: 0px 20px;
   border: 2px solid teal;
   height: 270px;
   padding: 10px;
   text-align: left;
 }
 
-.rating {
-  width: 100px;
-}
+
 
 .show-summary {
-  width: 500px;
+  width: 550px;
   margin: 10px;
 }
 
@@ -174,5 +172,28 @@ select {
   .search {
     flex-direction: column;
 
+  }
+
+  .container-show {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .div-link {
+    text-align: center;
+
+  }
+
+  .link-title {
+    font-size: 25px;
+    padding: 0.5em;
+  }
+
+  .details-div {
+    height: 70px;
+  }
+
+  .show-summary {
+    width: 100%;
   }
 }

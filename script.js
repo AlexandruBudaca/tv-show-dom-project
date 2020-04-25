@@ -1,11 +1,9 @@
 //You can edit ALL of the code here
+const allShows = getAllShows();
+
 function setup() {
-  // const allEpisodes = getAllEpisodes();
-  const allShows = getAllShows();
   makePageForShows(allShows);
   makeSelectShows(allShows);
-  console.log(allShows);
-  // listEpisodesShow();
 }
 
 //link to TvMaze
@@ -191,22 +189,28 @@ function makePageForShows(shows) {
     let divShow = document.createElement("div");
     divShow.className = "div-show";
     divContainer.appendChild(divShow);
+
     let divLink = document.createElement("div");
     divLink.className = "div-link";
     divShow.appendChild(divLink);
+
     let link = document.createElement("a");
     link.className = "link-title";
     link.id = show.id;
     link.addEventListener("click", showEpisodesWhenClickOnShow);
     divLink.appendChild(link);
     link.innerText = show.name;
+
     let containerShow = document.createElement("div");
     containerShow.className = "container-show";
     divShow.appendChild(containerShow);
+
     let divImage = document.createElement("div");
     containerShow.appendChild(divImage);
+
     let imageShow = document.createElement("img");
     divImage.appendChild(imageShow);
+
     if (show.image === null) {
       imageShow.src =
         "https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png";
@@ -217,6 +221,7 @@ function makePageForShows(shows) {
     let pDiv = document.createElement("div");
     pDiv.className = "p-div-show";
     containerShow.appendChild(pDiv);
+
     let showSummary = document.createElement("p");
     showSummary.className = "show-summary";
     showSummary.innerText = show.summary
@@ -225,13 +230,16 @@ function makePageForShows(shows) {
       .replace("<b>", "")
       .replace("</b>", "");
     pDiv.appendChild(showSummary);
+
     let detailsDiv = document.createElement("div");
     detailsDiv.className = "details-div";
     containerShow.appendChild(detailsDiv);
+
     let rated = document.createElement("p");
     rated.className = "rating";
     rated.innerText = `Rated: ${show.rating.average}`;
     detailsDiv.appendChild(rated);
+
     let genre = document.createElement("p");
     genre.innerText = `Genres: ${show.genres[0]}`;
     detailsDiv.appendChild(genre);
@@ -241,14 +249,17 @@ function makePageForShows(shows) {
 function showEpisodesWhenClickOnShow() {
   let allDives = document.getElementsByClassName("div-show");
   Array.from(allDives).forEach((item) => item.remove());
+
   // let formSelectShows = document.getElementById("shows");
   // formSelectShows.style.display = "none";
+
   let divSearchAll = document.getElementById("search-container");
   divSearchAll.style.display = "flex";
 
   let anchorId = this.id;
   let newShowUrl = url.replace("show-id", `${anchorId}`);
   callFetch(newShowUrl);
+  let showForm = document.getElementById(`${anchorId}`);
+  showForm.selected = true;
 }
-
 window.onload = setup;
