@@ -212,6 +212,16 @@ select {
   margin: 10px;
 }
 
+.div-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.num-show {
+  color: honeydew;
+
+}
 
 @media (max-width: 1000px) {
   .search {
@@ -240,5 +250,12 @@ select {
 
   .show-summary {
     width: 100%;
+  }
+
+  .div-filter {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

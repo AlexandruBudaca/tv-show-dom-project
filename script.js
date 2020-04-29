@@ -44,7 +44,11 @@ inputFilterShows.className = "filter";
 inputFilterShows.setAttribute("type", "text");
 inputFilterShows.id = "filter-shows";
 divFilter.appendChild(inputFilterShows);
-// inputFilterShows.addEventListener("keyup");
+inputFilterShows.addEventListener("keyup", searchInShows);
+//display number of Shows
+let numOfShows = document.createElement("p");
+numOfShows.className = "num-show";
+divFilter.appendChild(numOfShows);
 
 //search in episodes
 let divSearch = document.createElement("div");
@@ -130,8 +134,8 @@ function makePageForEpisodes(episodeList) {
       summary.innerText = "No Summary";
     } else {
       summary.innerText = el.summary
-        .replace("<p>", "")
-        .replace("</p>", "")
+        .replace(/<p>/g, "")
+        .replace(/<\/p>/g, "")
         .replace("<p></p>", "");
     }
   });
@@ -226,6 +230,8 @@ function makePageForShows(shows) {
     let divShow = document.createElement("div");
     divShow.className = "div-show";
     divContainer.appendChild(divShow);
+    divShow.id = "div-show-id";
+    divShow.style.display = "block";
 
     let divLink = document.createElement("div");
     divLink.className = "div-link";
@@ -261,14 +267,16 @@ function makePageForShows(shows) {
 
     let showSummary = document.createElement("p");
     showSummary.className = "show-summary";
-    if (show.summary == null) {
+    if (show.summary === null) {
       showSummary.innerText = "No Summary";
     } else {
       showSummary.innerText = show.summary
-        .replace(/<p>/, "")
-        .replace("</p>", "")
-        .replace(/<b>/, "")
-        .replace("</b>", "");
+        .replace(/<p>/g, "")
+        .replace(/<\/p>/g, "")
+        .replace(/<b>/g, "")
+        .replace(/<\/b>/g, "")
+        .replace(/<i>/g, "")
+        .replace(/<\/i>/g, "");
     }
     summaryDiv.appendChild(showSummary);
 
@@ -304,6 +312,47 @@ function showEpisodesWhenClickOnShow() {
 
   optionShow.selected = true;
   document.getElementById("div-filter-show").remove();
+}
+
+function searchInShows() {
+  let inputValue = inputFilterShows.value.toLowerCase();
+  let count = 0;
+  Array.from(document.getElementsByClassName("div-show")).filter((div) => {
+    let txt = div.innerText.toLowerCase();
+
+    if (txt.includes(inputValue)) {
+      div.style.display = "block";
+      count += 1;
+    } else {
+      div.style.display = "none";
+    }
+  });
+  let txtShows;
+  if (count === 1) {
+    txtShows = "show";
+  } else {
+    txtShows = "shows";
+  }
+  if (inputValue === "") {
+    numOfShows.innerText = "";
+  } else {
+    numOfShows.innerText = `We found: ${count
+      .toString()
+      .padStart(1, "0")} ${txtShows}`;
+  }
+}
+
+function displayFindShows() {
+  let selectFind = document.createElement("select");
+  divFilter.appendChild(selectFind);
+  Array.from(document.getElementsByClassName("div-show")).forEach((div) => {
+    let divDisplay = document.getElementById("div-show-id").style.display;
+    if (divDisplay === "block") {
+      let findShow = document.createElement("option");
+      findShow.innerText = div.firstChild.innerText;
+      selectFind.appendChild(findShow);
+    }
+  });
 }
 
 window.onload = setup;
