@@ -223,6 +223,10 @@ select {
 
 }
 
+span {
+  background-color: tomato;
+}
+
 @media (max-width: 1000px) {
   .search {
     flex-direction: column;
