@@ -216,12 +216,18 @@ function listEpisodesShow() {
 }
 function callFetch(episodesUrl) {
   fetch(episodesUrl)
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    })
     .then((data) => {
       selectEpisode(data);
       makePageForEpisodes(data);
       searchInEpisodes();
-    });
+    })
+    .catch((error) => console.error("Something is wrong!", error));
 }
 
 function makePageForShows(shows) {
