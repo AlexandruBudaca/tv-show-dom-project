@@ -1,7 +1,7 @@
 //You can edit ALL of the code here
 const allShows = getAllShows();
 let divRoot = document.getElementById("root");
-
+let currentEpisodes = [];
 function setup() {
   linkToMaze();
   makePageForShows(allShows);
@@ -40,11 +40,12 @@ labelFilter.className = "label-input";
 labelFilter.innerText = "Filter: ";
 labelFilter.htmlFor = "filter-shows";
 let inputFilterShows = document.createElement("input");
-inputFilterShows.className = "filter";
 inputFilterShows.setAttribute("type", "text");
 inputFilterShows.id = "filter-shows";
+inputFilterShows.placeholder = "Press Enter";
 divFilter.appendChild(inputFilterShows);
-inputFilterShows.addEventListener("keyup", searchInShows);
+inputFilterShows.addEventListener("input", searchInShows);
+inputFilterShows.addEventListener("input", makeSelectShowHomePage);
 
 //display number of Shows
 let numOfShows = document.createElement("p");
@@ -100,8 +101,7 @@ divContainer.id = "container-div";
 divRoot.appendChild(divContainer);
 
 function makePageForEpisodes(episodeList) {
-  let allDives = document.getElementsByClassName("episode");
-  Array.from(allDives).forEach((item) => item.remove());
+  document.getElementById("container-div").innerHTML = "";
 
   episodeList.forEach((el) => {
     let divEpisode = document.createElement("div");
@@ -144,20 +144,17 @@ function makePageForEpisodes(episodeList) {
 
 function searchInEpisodes() {
   let inputValue = searchBar.value.toLowerCase();
-  let count = 0;
-  Array.from(document.getElementsByClassName("episode")).forEach((div) => {
-    let txt = div.innerText.toLowerCase();
-    if (txt.indexOf(inputValue) != -1) {
-      div.style.display = "block";
-      count += 1;
-    } else {
-      div.style.display = "none";
-    }
-  });
-  let allDivEpisodes = document.getElementsByClassName("episode").length;
-  numOfEpisodes.innerText = `Displaying ${count
+
+  const filterEpisodes = currentEpisodes.filter(
+    (ep) =>
+      ep.summary.toLowerCase().includes(inputValue) ||
+      ep.name.toLowerCase().includes(inputValue)
+  );
+  makePageForEpisodes(filterEpisodes);
+
+  numOfEpisodes.innerText = `Displaying ${filterEpisodes.length
     .toString()
-    .padStart(2, "0")} / ${allDivEpisodes} episodes`;
+    .padStart(2, "0")} / ${currentEpisodes.length} episodes`;
 }
 
 function selectEpisode(episodes) {
@@ -214,6 +211,7 @@ function listEpisodesShow() {
   let newUrl = url.replace("show-id", `${numberShow}`);
   callFetch(newUrl);
 }
+
 function callFetch(episodesUrl) {
   fetch(episodesUrl)
     .then((response) => {
@@ -225,7 +223,7 @@ function callFetch(episodesUrl) {
     .then((data) => {
       selectEpisode(data);
       makePageForEpisodes(data);
-      searchInEpisodes();
+      currentEpisodes = data;
     })
     .catch((error) => console.error("Something is wrong!", error));
 }
@@ -299,7 +297,6 @@ function makePageForShows(shows) {
     genre.innerText = `Genres: ${show.genres[0]}`;
     detailsDiv.appendChild(genre);
   });
-  history.pushState("sdad", "sadasd", "index.html");
 }
 
 function showEpisodesWhenClickOnShow() {
@@ -321,7 +318,7 @@ function showEpisodesWhenClickOnShow() {
   document.getElementById("div-filter-show").remove();
 }
 
-function searchInShows(allShows) {
+function searchInShows() {
   inputValueFilter = inputFilterShows.value.toLowerCase();
   let count = 0;
   Array.from(document.getElementsByClassName("div-show")).filter((div) => {
@@ -329,6 +326,7 @@ function searchInShows(allShows) {
     if (txtDiv.includes(inputValueFilter)) {
       div.style.display = "block";
       div.classList.add("filter");
+
       count += 1;
     } else {
       div.style.display = "none";
@@ -347,16 +345,26 @@ function searchInShows(allShows) {
   } else {
     numOfShows.innerText = `We found: ${count
       .toString()
-      .padStart(1, "0")} ${txtShows}`;
+      .padStart(2, "0")} ${txtShows}`;
   }
 }
+let selectFind = document.createElement("select");
+selectFind.style.display = "none";
+selectFind.id = "selectShow";
+divFilter.appendChild(selectFind);
 
 function makeSelectShowHomePage() {
+  selectFind.style.display = "block";
+  selectFind.innerHTML = "";
+  if (inputFilterShows.value === "") {
+    selectFind.style.display = "none";
+  }
   Array.from(document.getElementsByClassName("filter")).forEach((show) => {
     let findShow = document.createElement("option");
-    findShow.className = "opt-filter";
-    findShow.innerText = show.id;
-    findShow.id = show.id;
+    findShow.innerText = show.children[0].innerText;
+    findShow.className = "opt-find-class";
+    findShow.id = "opt-find";
+    findShow.selected = false;
     selectFind.appendChild(findShow);
   });
 }
