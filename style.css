@@ -137,6 +137,13 @@ p {
 select {
   height: 30px;
   border: none;
+  background-color: teal;
+  color: whitesmoke;
+  box-shadow: 5px 5px 10px black;
+  margin: 0px 50px;
+  outline: none;
+  max-width: 300px;
+
 }
 
 .select {
