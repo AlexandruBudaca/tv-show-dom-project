@@ -210,7 +210,10 @@ select {
   border: 2px solid teal;
   height: 270px;
   padding: 10px;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
 }
 
 
@@ -231,9 +234,6 @@ select {
 
 }
 
-span {
-  background-color: tomato;
-}
 
 @media (max-width: 1000px) {
   .search {
@@ -257,7 +257,7 @@ span {
   }
 
   .details-div {
-    height: 70px;
+    height: 170px;
   }
 
   .show-summary {

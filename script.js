@@ -308,8 +308,14 @@ function makePageForShows(shows) {
     detailsDiv.appendChild(rated);
 
     let genre = document.createElement("p");
-    genre.innerText = `Genres: ${show.genres}`;
+    genre.innerText = `Genres: ${show.genres.join(" /")}`;
     detailsDiv.appendChild(genre);
+    let status = document.createElement("p");
+    status.innerText = `Status: ${show.status}`;
+    detailsDiv.appendChild(status);
+    let runtime = document.createElement("p");
+    runtime.innerText = `Runtime: ${show.runtime}`;
+    detailsDiv.appendChild(runtime);
   });
 }
 
