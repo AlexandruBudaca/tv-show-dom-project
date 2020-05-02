@@ -143,6 +143,7 @@ function makePageForEpisodes(episodeList) {
 
     let summary = document.createElement("p");
     divEpisode.appendChild(summary);
+
     if (el.summary == null) {
       summary.innerText = "No Summary";
     } else {
@@ -168,6 +169,7 @@ function searchInEpisodes() {
   numOfEpisodes.innerText = `Displaying ${filterEpisodes.length
     .toString()
     .padStart(2, "0")} / ${currentEpisodes.length} episodes`;
+  markHighlights(inputValue);
 }
 
 function selectEpisode(episodes) {
@@ -198,8 +200,8 @@ function scroll(selectId) {
     block: "end",
     inline: "nearest",
   });
-  console.log(divId);
-  divId.style.color = "tomato";
+
+  divId.style.backgroundColor = "teal";
 }
 
 function makeSelectShows(allShows) {
@@ -363,6 +365,7 @@ function filterInShows() {
       .toString()
       .padStart(2, "0")} ${txtShows}`;
   }
+  markHighlights(valueFilter);
 }
 
 function makeSelectShowHomePage(optShow) {
@@ -380,6 +383,12 @@ function makeSelectShowHomePage(optShow) {
 
     selectFind.appendChild(findShow);
   });
+}
+
+function markHighlights(searchValue) {
+  let context = document.getElementById("container-div");
+  let instance = new Mark(context);
+  instance.mark(searchValue);
 }
 
 window.onload = setup;

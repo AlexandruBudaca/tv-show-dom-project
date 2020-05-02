@@ -62,7 +62,6 @@ label {
   background-color: rgb(40, 40, 40);
   color: white;
   width: 300px;
-  height: 500px;
   margin: 20px;
   padding: 0 15px;
   box-shadow: 5px 5px 10px black;
@@ -234,6 +233,12 @@ select {
   margin: 10px;
 
 }
+
+mark {
+  background: tomato;
+  color: black;
+}
+
 
 
 @media (max-width: 1000px) {
