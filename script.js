@@ -223,10 +223,10 @@ function listEpisodesShow() {
   let showForm = document.forms[0].allShows;
   let numberShow = showForm.options[showForm.selectedIndex].value;
   let newUrl = url.replace("show-id", `${numberShow}`);
-  callFetch(newUrl);
+  fetchEpisodes(newUrl);
 }
 
-function callFetch(episodesUrl) {
+function fetchEpisodes(episodesUrl) {
   fetch(episodesUrl)
     .then((response) => {
       if (!response.ok) {
@@ -323,7 +323,6 @@ function makePageForShows(shows) {
 
 function showEpisodesWhenClickOnShow() {
   makeSelectShows(allShows);
-
   document.getElementById("container-div").innerHTML = "";
 
   let divSearchAll = document.getElementById("search-container");
@@ -331,11 +330,10 @@ function showEpisodesWhenClickOnShow() {
 
   let anchorId = this.id;
 
-  let newShowUrl = url.replace("show-id", `${anchorId}`);
-  callFetch(newShowUrl);
-  let optionShow = document.getElementById(`${anchorId}`);
+  let newShowUrl = url.replace("show-id", `${this.id}`);
+  fetchEpisodes(newShowUrl);
 
-  optionShow.selected = true;
+  document.getElementById(`${this.id}`).selected = true;
   document.getElementById("div-filter-show").innerHTML = "";
 }
 
@@ -390,5 +388,5 @@ function markHighlights(searchValue) {
   let instance = new Mark(context);
   instance.mark(searchValue);
 }
-
+function fetchShows() {}
 window.onload = setup;
