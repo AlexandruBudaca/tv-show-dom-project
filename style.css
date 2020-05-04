@@ -6,47 +6,40 @@ body {
 
 .div-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 70px;
+  background-color: rgb(40, 40, 40);
+  position: sticky;
+  top: 0;
+  box-shadow: 5px 5px 10px black;
   margin: 0;
-
+}
+.nav-link {
+  color: honeydew;
+  margin-right: 50px;
+  cursor: pointer;
 }
 
 .logo {
-  width: 100%;
-  background-color: rgb(40, 40, 40);
   color: teal;
-  margin: 0;
-  position: fixed;
-  padding: 20px 30px;
-  box-shadow: 5px 5px 10px black;
-  align-self: center;
-  z-index: 1;
+  margin-left: 50px;
 }
-
 .pLogo {
   position: absolute;
   color: honeydew;
-  margin-top: 25px;
-  font-size: medium;
-  position: fixed;
-  padding: 20px 37px;
-  z-index: 2
+  margin-left: 55px;
+  margin-top: 20px;
 }
-
 label {
   color: honeydew;
-  margin: 10px
+  margin: 10px;
 }
 
 .div-filter {
   align-self: center;
-  margin-top: 30px;
-
+  margin-top: 50px;
 }
-
-
 
 .container {
   width: 100%;
@@ -142,7 +135,6 @@ select {
   margin: 0px 50px;
   outline: none;
   max-width: 300px;
-
 }
 
 .select {
@@ -152,7 +144,6 @@ select {
   margin: 0px 50px;
   outline: none;
   max-width: 300px;
-
 }
 
 #shows {
@@ -163,9 +154,8 @@ select {
   outline: none;
 }
 
-
-
 .div-show {
+  display: block;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -193,15 +183,13 @@ select {
 }
 
 .link-title:hover {
-  color: teal
+  color: teal;
 }
 
 .container-show {
   margin: 20px;
   display: flex;
   flex-direction: row;
-
-
 }
 
 .details-div {
@@ -214,8 +202,6 @@ select {
   justify-content: center;
   align-items: left;
 }
-
-
 
 .show-summary {
   width: 550px;
@@ -231,7 +217,6 @@ select {
 .num-show {
   color: honeydew;
   margin: 10px;
-
 }
 
 mark {
@@ -239,12 +224,9 @@ mark {
   color: black;
 }
 
-
-
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .search {
     flex-direction: column;
-
   }
 
   .container-show {
@@ -254,7 +236,6 @@ mark {
 
   .div-link {
     text-align: center;
-
   }
 
   .link-title {
