@@ -31,11 +31,14 @@ function homeBtn() {
   location.reload();
   // makePageForShows(allShows);
 }
-// input filter shows
+
+//div filter
 let divFilter = document.createElement("div");
 divRoot.appendChild(divFilter);
 divFilter.className = "div-filter";
 divFilter.id = "div-filter-show";
+
+// input filter shows//
 let labelFilter = document.createElement("label");
 divFilter.appendChild(labelFilter);
 labelFilter.className = "label-input";
@@ -52,7 +55,14 @@ inputFilterShows.addEventListener("input", makeSelectShowHomePage);
 let numOfShows = document.createElement("p");
 numOfShows.className = "num-show";
 divFilter.appendChild(numOfShows);
-
+// select filter
+let selectFind = document.createElement("select");
+selectFind.style.display = "block";
+selectFind.id = "selectShow";
+divFilter.appendChild(selectFind);
+selectFind.addEventListener("change", () => {
+  scroll("selectShow");
+});
 //search in episodes
 let divSearch = document.createElement("div");
 divSearch.id = "search-container";
@@ -94,14 +104,7 @@ formSelect.appendChild(selectEpisodes);
 selectEpisodes.addEventListener("change", () => {
   scroll("selectEpisodesId");
 });
-// select filter
-let selectFind = document.createElement("select");
-selectFind.style.display = "none";
-selectFind.id = "selectShow";
-divFilter.appendChild(selectFind);
-selectFind.addEventListener("change", () => {
-  scroll("selectShow");
-});
+
 //Container for episodes
 let divContainer = document.createElement("div");
 divContainer.className = "container";
@@ -140,7 +143,7 @@ function makePageForEpisodes(episodeList) {
     let summary = document.createElement("p");
     divEpisode.appendChild(summary);
 
-    if (el.summary == null) {
+    if (el.summary === null) {
       summary.innerText = "No Summary";
     } else {
       summary.innerText = el.summary
@@ -197,7 +200,7 @@ function scroll(selectId) {
     inline: "nearest",
   });
 
-  divId.style.backgroundColor = "teal";
+  divId.style.backgroundColor = "black";
 }
 
 function makeSelectShows(allShows) {
@@ -361,18 +364,16 @@ function filterInShows() {
 }
 
 function makeSelectShowHomePage(optShow) {
-  selectFind.style.display = "block";
+  // if (inputFilterShows.value === "") {
+  //   selectFind.style.display = "none";
+  // }
 
-  if (inputFilterShows.value === "") {
-    selectFind.style.display = "none";
-  }
   Array.from(optShow).forEach((show) => {
     let findShow = document.createElement("option");
     findShow.innerText = show.name;
     findShow.id = "opt-find";
     findShow.value = show.id;
     findShow.selected = false;
-
     selectFind.appendChild(findShow);
   });
 }
