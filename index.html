@@ -10,7 +10,18 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <a href="https://www.tvmaze.com/" class="link-Tv-Maze" target="_blank">Tv Maze</a>
+  <div class="div-header">
+    <h1 class="logo">{S}erials</h1>
+    <p class="pLogo">tv-show database</p>
+    <a onclick="homeBtn()" class="nav-link">Home</a>
+  </div>
+  <div id="root">
+    <div id="div-filter-show" class="div-filter">
+      <label for="filter-shows" class="label-input">Filter:</label>
+      <input type="text" id="filter-shows" placeholder="Search here" oninput="filterInShows()">
+    </div>
+  </div>
 
   <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
   <script src="shows.js"></script>

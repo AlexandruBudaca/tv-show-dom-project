@@ -1,60 +1,29 @@
 //You can edit ALL of the code here
 const allShows = getAllShows();
 let divRoot = document.getElementById("root");
+let inputFilterShows = document.getElementById("filter-shows");
+let divFilter = document.getElementById("div-filter-show");
 let currentEpisodes = [];
 
 function setup() {
-  linkToMaze();
   makePageForShows(allShows);
   makeSelectShowHomePage(allShows);
 }
 
-function linkToMaze() {
-  let linkTvMaze = document.createElement("a");
-  linkTvMaze.href = "https://www.tvmaze.com/";
-  linkTvMaze.innerText = "Tv Maze";
-  linkTvMaze.className = "link-Tv-Maze";
-  linkTvMaze.target = "_blank";
-  document.body.appendChild(linkTvMaze);
-}
-
-//header
-let headerHome = document.createElement("div");
-headerHome.className = "div-header";
-divRoot.appendChild(headerHome);
-headerHome.innerHTML = `
-  <h1 class="logo">{S}erials </h1>
-  <p class="pLogo">tv-show database</p>
-  <a class= "nav-link" onclick ="homeBtn()">Home</a> 
-`;
 function homeBtn() {
   location.reload();
-  // makePageForShows(allShows);
 }
+//search in episodes
+let divSearch = document.createElement("div");
+divSearch.id = "search-container";
+divRoot.appendChild(divSearch).className = "search";
+divSearch.style.display = "none";
 
-//div filter
-let divFilter = document.createElement("div");
-divRoot.appendChild(divFilter);
-divFilter.className = "div-filter";
-divFilter.id = "div-filter-show";
-
-// input filter shows//
-let labelFilter = document.createElement("label");
-divFilter.appendChild(labelFilter);
-labelFilter.className = "label-input";
-labelFilter.innerText = "Filter: ";
-labelFilter.htmlFor = "filter-shows";
-let inputFilterShows = document.createElement("input");
-inputFilterShows.setAttribute("type", "text");
-inputFilterShows.id = "filter-shows";
-inputFilterShows.placeholder = "Press Enter";
-divFilter.appendChild(inputFilterShows);
-inputFilterShows.addEventListener("input", filterInShows);
-inputFilterShows.addEventListener("input", makeSelectShowHomePage);
-//display number of Shows
+//display number on shows on Home Page
 let numOfShows = document.createElement("p");
 numOfShows.className = "num-show";
 divFilter.appendChild(numOfShows);
+
 // select filter
 let selectFind = document.createElement("select");
 selectFind.style.display = "block";
@@ -63,11 +32,6 @@ divFilter.appendChild(selectFind);
 selectFind.addEventListener("change", () => {
   scroll("selectShow");
 });
-//search in episodes
-let divSearch = document.createElement("div");
-divSearch.id = "search-container";
-divRoot.appendChild(divSearch).className = "search";
-divSearch.style.display = "none";
 
 //search input
 let labelInput = document.createElement("label");
@@ -244,7 +208,6 @@ function fetchEpisodes(episodesUrl) {
 
 function makePageForShows(shows) {
   shows.sort((a, b) => (a.name > b.name ? 1 : -1));
-  // document.getElementById("container-div").innerHTML = "";
   shows.forEach((show) => {
     let divShow = document.createElement("div");
     divShow.className = "div-show";
@@ -322,6 +285,7 @@ function makePageForShows(shows) {
 
 function showEpisodesWhenClickOnShow() {
   makeSelectShows(allShows);
+
   document.getElementById("container-div").innerHTML = "";
 
   let divSearchAll = document.getElementById("search-container");
@@ -364,10 +328,6 @@ function filterInShows() {
 }
 
 function makeSelectShowHomePage(optShow) {
-  // if (inputFilterShows.value === "") {
-  //   selectFind.style.display = "none";
-  // }
-
   Array.from(optShow).forEach((show) => {
     let findShow = document.createElement("option");
     findShow.innerText = show.name;

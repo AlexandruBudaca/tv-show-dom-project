@@ -15,6 +15,7 @@ body {
   box-shadow: 5px 5px 10px black;
   margin: 0;
 }
+
 .nav-link {
   color: honeydew;
   margin-right: 50px;
@@ -25,12 +26,14 @@ body {
   color: teal;
   margin-left: 50px;
 }
+
 .pLogo {
   position: absolute;
   color: honeydew;
   margin-left: 55px;
   margin-top: 20px;
 }
+
 label {
   color: honeydew;
   margin: 10px;
@@ -38,7 +41,6 @@ label {
 
 .div-filter {
   align-self: center;
-  margin-top: 50px;
 }
 
 .container {
