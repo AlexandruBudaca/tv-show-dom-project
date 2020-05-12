@@ -13,16 +13,15 @@ function setup() {
 function homeBtn() {
   location.reload();
 }
+//display number on shows on Home Page
+let numOfShows = document.createElement("p");
+numOfShows.className = "num-show";
+divFilter.appendChild(numOfShows);
 //search in episodes
 let divSearch = document.createElement("div");
 divSearch.id = "search-container";
 divRoot.appendChild(divSearch).className = "search";
 divSearch.style.display = "none";
-
-//display number on shows on Home Page
-let numOfShows = document.createElement("p");
-numOfShows.className = "num-show";
-divFilter.appendChild(numOfShows);
 
 // select filter
 let selectFind = document.createElement("select");
@@ -163,8 +162,6 @@ function scroll(selectId) {
     block: "end",
     inline: "nearest",
   });
-
-  divId.style.backgroundColor = "black";
 }
 
 function makeSelectShows(allShows) {

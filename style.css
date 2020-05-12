@@ -41,6 +41,7 @@ label {
 
 .div-filter {
   align-self: center;
+  margin-top: 30px;
 }
 
 .container {
@@ -224,6 +225,10 @@ select {
 mark {
   background: tomato;
   color: black;
+}
+
+.scroll {
+  background-color: black;
 }
 
 @media (max-width: 800px) {
