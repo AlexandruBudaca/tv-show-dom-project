@@ -3,6 +3,19 @@ const allShows = getAllShows();
 let divRoot = document.getElementById("root");
 let inputFilterShows = document.getElementById("filter-shows");
 let divFilter = document.getElementById("div-filter-show");
+let selectFind = document.getElementById("selectShow");
+selectFind.addEventListener("change", () => {
+  scroll("selectShow");
+});
+let numOfShows = document.getElementById("numShow");
+let divSearch = document.getElementById("search-container");
+
+//Container for episodes
+let divContainer = document.createElement("div");
+divContainer.className = "container";
+divContainer.id = "container-div";
+divRoot.appendChild(divContainer);
+
 let currentEpisodes = [];
 
 function setup() {
@@ -13,66 +26,6 @@ function setup() {
 function homeBtn() {
   location.reload();
 }
-//display number on shows on Home Page
-let numOfShows = document.createElement("p");
-numOfShows.className = "num-show";
-divFilter.appendChild(numOfShows);
-//search in episodes
-let divSearch = document.createElement("div");
-divSearch.id = "search-container";
-divRoot.appendChild(divSearch).className = "search";
-divSearch.style.display = "none";
-
-// select filter
-let selectFind = document.createElement("select");
-selectFind.style.display = "block";
-selectFind.id = "selectShow";
-divFilter.appendChild(selectFind);
-selectFind.addEventListener("change", () => {
-  scroll("selectShow");
-});
-
-//search input
-let labelInput = document.createElement("label");
-divSearch.appendChild(labelInput);
-labelInput.innerText = "Search";
-labelInput.htmlFor = "input-search";
-let input = document.createElement("input");
-divSearch.appendChild(input);
-input.id = "input-search";
-input.setAttribute("type", "text");
-let searchBar = document.getElementById("input-search");
-searchBar.addEventListener("keyup", searchInEpisodes);
-
-//displaying the number of episodes
-let numOfEpisodes = document.createElement("p");
-numOfEpisodes.className = "num-episodes";
-divSearch.appendChild(numOfEpisodes);
-//select shows
-let formShows = document.createElement("form");
-divSearch.appendChild(formShows);
-let selectShows = document.createElement("select");
-formShows.appendChild(selectShows);
-selectShows.id = "shows";
-selectShows.name = "allShows";
-selectShows.addEventListener("change", listEpisodesShow);
-//select episodes
-let formSelect = document.createElement("form");
-divSearch.appendChild(formSelect);
-let selectEpisodes = document.createElement("select");
-selectEpisodes.setAttribute("name", "selectEp");
-selectEpisodes.className = "select";
-selectEpisodes.id = "selectEpisodesId";
-formSelect.appendChild(selectEpisodes);
-selectEpisodes.addEventListener("change", () => {
-  scroll("selectEpisodesId");
-});
-
-//Container for episodes
-let divContainer = document.createElement("div");
-divContainer.className = "container";
-divContainer.id = "container-div";
-divRoot.appendChild(divContainer);
 
 function makePageForEpisodes(episodeList) {
   document.getElementById("container-div").innerHTML = "";
@@ -107,7 +60,7 @@ function makePageForEpisodes(episodeList) {
     divEpisode.appendChild(summary);
 
     if (el.summary === null) {
-      summary.innerText = "No Summary";
+      el.summary = "No Summary";
     } else {
       summary.innerText = el.summary
         .replace(/<p>/g, "")
@@ -118,14 +71,14 @@ function makePageForEpisodes(episodeList) {
 }
 
 function searchInEpisodes() {
-  let inputValue = searchBar.value.toLowerCase();
-
+  let inputValue = document.getElementById("input-search").value;
+  inputValue.toLowerCase();
+  let numOfEpisodes = document.getElementById("number-episodes");
   const filterEpisodes = currentEpisodes.filter(
     (ep) =>
       ep.summary.toLowerCase().includes(inputValue) ||
       ep.name.toLowerCase().includes(inputValue)
   );
-
   makePageForEpisodes(filterEpisodes);
   selectEpisode(filterEpisodes);
   numOfEpisodes.innerText = `Displaying ${filterEpisodes.length
@@ -140,6 +93,7 @@ function selectEpisode(episodes) {
   let defaultOption = document.createElement("option");
   defaultOption.innerText = "Go to";
   defaultOption.className = "option";
+  let selectEpisodes = document.getElementById("selectEpisodesId");
   selectEpisodes.appendChild(defaultOption);
 
   episodes.forEach((ep) => {
@@ -164,8 +118,27 @@ function scroll(selectId) {
   });
 }
 
-function makeSelectShows(allShows) {
+function makeSelect(allShows) {
   allShows.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+  //select shows
+  let formShows = document.createElement("form");
+  divSearch.appendChild(formShows);
+  let selectShows = document.createElement("select");
+  formShows.appendChild(selectShows);
+  selectShows.id = "shows";
+  selectShows.name = "allShows";
+  selectShows.addEventListener("change", listEpisodesShow);
+  //select episodes
+  let formSelect = document.createElement("form");
+  divSearch.appendChild(formSelect);
+  formSelect.innerHTML = `
+    <select name="SelectEp" class="select" id="selectEpisodesId"></select>
+  `;
+  let selectEpisodes = document.getElementById("selectEpisodesId");
+  selectEpisodes.addEventListener("change", () => {
+    scroll("selectEpisodesId");
+  });
 
   allShows.forEach((show) => {
     let optShow = document.createElement("option");
@@ -179,7 +152,8 @@ function makeSelectShows(allShows) {
 let url = "https://api.tvmaze.com/shows/show-id/episodes";
 
 function listEpisodesShow() {
-  searchBar.value = "";
+  let inputValue = document.getElementById("input-search");
+  inputValue.value = "";
   let showForm = document.forms[0].allShows;
   let numberShow = showForm.options[showForm.selectedIndex].value;
   let newUrl = url.replace("show-id", `${numberShow}`);
@@ -209,8 +183,8 @@ function makePageForShows(shows) {
     let divShow = document.createElement("div");
     divShow.className = "div-show";
     divShow.id = show.id;
-    divContainer.appendChild(divShow);
     divShow.style.display = "block";
+    divContainer.appendChild(divShow);
 
     let divLink = document.createElement("div");
     divLink.className = "div-link";
@@ -262,26 +236,35 @@ function makePageForShows(shows) {
     let detailsDiv = document.createElement("div");
     detailsDiv.className = "details-div";
     containerShow.appendChild(detailsDiv);
-
-    let rated = document.createElement("p");
-    rated.className = "rating";
-    rated.innerText = `Rated: ${show.rating.average}`;
-    detailsDiv.appendChild(rated);
-
-    let genre = document.createElement("p");
-    genre.innerText = `Genres: ${show.genres.join(" /")}`;
-    detailsDiv.appendChild(genre);
-    let status = document.createElement("p");
-    status.innerText = `Status: ${show.status}`;
-    detailsDiv.appendChild(status);
-    let runtime = document.createElement("p");
-    runtime.innerText = `Runtime: ${show.runtime}`;
-    detailsDiv.appendChild(runtime);
+    detailsDiv.innerHTML = `
+      <p class="rating">Rated: ${show.rating.average}</p>
+      <p>Genres: ${show.genres.join(" /")}</p>
+      <p>Status: ${show.status}</p>
+      <p>Runtime: ${show.runtime}</p>
+    `;
   });
 }
 
 function showEpisodesWhenClickOnShow() {
-  makeSelectShows(allShows);
+  //search input
+  let labelInput = document.createElement("label");
+  divSearch.appendChild(labelInput);
+  labelInput.innerText = "Search";
+  labelInput.htmlFor = "input-search";
+
+  let input = document.createElement("input");
+  divSearch.appendChild(input);
+  input.id = "input-search";
+  input.setAttribute("type", "text");
+  input.addEventListener("keyup", searchInEpisodes);
+
+  //displaying the number of episodes
+  let numOfEpisodes = document.createElement("p");
+  numOfEpisodes.className = "num-episodes";
+  numOfEpisodes.id = "number-episodes";
+  divSearch.appendChild(numOfEpisodes);
+
+  makeSelect(allShows);
 
   document.getElementById("container-div").innerHTML = "";
 
